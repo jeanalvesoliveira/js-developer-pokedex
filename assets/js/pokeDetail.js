@@ -61,19 +61,21 @@ function convertPokemonToDetail(pokemon){
         </header>
         <main>
             <section>
-                <h1>Sobre</h1>
+                <h1>Informações</h1>
+                <h2>Dados Físicos</h2>
                 <p>Altura: ${pokemon.altura}</p>
                 <p>Peso: ${pokemon.peso}</p>
-                <p>Habilidades: habil-01, habil-02</p>
-            </section>
-            <section>
-                <h1>Status Base</h1>
-                <p>HP: 45</p>
-                <p>Ataque: 23</p>
-                <p>Defesa: 18</p>
-                <p>Ataque Especial: 67</p>
-                <p>Defesa Especial: 67</p>
-                <p>Velocidade: 21</p>
+                <h2>Habilidades</h2>
+                    <ul>
+                        ${pokemon.habilidades.map(habil => `<li>${habil}</li>`).join('')}
+                    </ul>
+                <h2>Status Básicos</h2>
+                <p>HP: ${pokemon.status[0][1]}</p>
+                <p>Ataque: ${pokemon.status[1][1]}</p>
+                <p>Defesa: ${pokemon.status[2][1]}</p>
+                <p>Ataque Especial: ${pokemon.status[3][1]}</p>
+                <p>Defesa Especial: ${pokemon.status[4][1]}</p>
+                <p>Velocidade: ${pokemon.status[5][1]}</p>
             </section>
         </main>
         <footer>
@@ -82,7 +84,7 @@ function convertPokemonToDetail(pokemon){
             </a>
         </footer>
     `
-    }
+}
 
 
 fetch(`https://pokeapi.co/api/v2/pokemon/${getId()}`)
