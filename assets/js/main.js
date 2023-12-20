@@ -9,19 +9,19 @@ const limitePokemons = 151
 function convertPokemonToLi(pokemon){
     return `
     <li id="listaDetalhes" class="pokemon ${pokemon.tipoPrincipal}">
-    <a id="link" href="poke-detail.html?id=${pokemon.numero}">
-    <article>
-            <header>
-                <h1 class="poke-nome">${pokemon.nome}</h1>
-                <h2 class="poke-numero">#${pokemon.numero}</h2>
-            </header>
-            <section>
-                <ul class="poke-tipo">
-                ${pokemon.tipos.map(tipo => `<li class="tipo ${tipo}">${tipo}</li>`).join('')}
-                </ul>
-                <img class="poke-imagem" src="${pokemon.imagem}" alt="${pokemon.name}">
-            </section>            
-        </article>
+        <a id="link" href="poke-detail.html?id=${pokemon.numero}">
+            <article>
+                <header>
+                    <h1 class="poke-nome">${pokemon.nome}</h1>
+                    <h2 class="poke-numero">#${pokemon.numero}</h2>
+                </header>
+                <section>
+                    <ul class="poke-tipo">
+                    ${pokemon.tipos.map(tipo => `<li class="tipo ${tipo}">${tipo}</li>`).join('')}
+                    </ul>
+                    <img class="poke-imagem" src="${pokemon.imagem}" alt="${pokemon.name}">
+                </section>            
+            </article>
         </a>
     </li>
     `
