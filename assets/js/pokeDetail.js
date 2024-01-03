@@ -41,6 +41,8 @@ function convertPokemonApiToPokemon(pokeDetail){
     pokemon.peso = convertWeight(pokeDetail.weight)
     pokemon.habilidades = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name)
     pokemon.tipos = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
+    const [tipoPrincipal] = pokemon.tipos
+    pokemon.tipoPrincipal = tipoPrincipal
     pokemon.status = pokeDetail.stats.map((statusValue) => [statusValue.stat.name, statusValue.base_stat])
     pokemon.imagem = pokeDetail.sprites.other.dream_world.front_default
     console.log(pokeDetail)
@@ -51,36 +53,42 @@ function convertPokemonApiToPokemon(pokeDetail){
 
 function convertPokemonToDetail(pokemon){
     return `
-        <header class="titulo">
-            <h1>${pokemon.nome}</h1>
-            <h2>${pokemon.numero}</h2>
-            <ul>
-            ${pokemon.tipos.map(tipo => `<li>${tipo}</li>`).join('')}
+        <header class="titulo ${pokemon.tipoPrincipal}">
+            <div class="nome-numero">
+                <h1 class="poke-nome">${pokemon.nome}</h1>
+                <h2 class="poke-numero">#${pokemon.numero}</h2>
+            </div>
+            <img class="poke-imagem" src="${pokemon.imagem}" alt="foto do pokemon">
+            <ul class="tipos">
+            ${pokemon.tipos.map(tipo => `<li class = "tipo ${tipo}">${tipo}</li>`).join('')}
             </ul>
-            <img src="${pokemon.imagem}" alt="foto do pokemon">
         </header>
         <main>
-            <section>
+            <section class="dados-pokemon">
                 <h1>Informações</h1>
                 <h2>Dados Físicos</h2>
-                <p>Altura: ${pokemon.altura}</p>
-                <p>Peso: ${pokemon.peso}</p>
+                <ul>
+                    <li>Altura: ${pokemon.altura}</li>
+                    <li>Peso: ${pokemon.peso}</li>
+                </ul>
                 <h2>Habilidades</h2>
-                    <ul>
-                        ${pokemon.habilidades.map(habil => `<li>${habil}</li>`).join('')}
+                    <ul class="habilidades">
+                        ${pokemon.habilidades.map(habil => `<li class="habilidade">${habil}</li>`).join('')}
                     </ul>
                 <h2>Status Básicos</h2>
-                <p>HP: ${pokemon.status[0][1]}</p>
-                <p>Ataque: ${pokemon.status[1][1]}</p>
-                <p>Defesa: ${pokemon.status[2][1]}</p>
-                <p>Ataque Especial: ${pokemon.status[3][1]}</p>
-                <p>Defesa Especial: ${pokemon.status[4][1]}</p>
-                <p>Velocidade: ${pokemon.status[5][1]}</p>
+                <ul>
+                    <li>HP: ${pokemon.status[0][1]}</li>
+                    <li>Ataque: ${pokemon.status[1][1]}</li>
+                    <li>Defesa: ${pokemon.status[2][1]}</li>
+                    <li>Ataque Especial: ${pokemon.status[3][1]}</li>
+                    <li>Defesa Especial: ${pokemon.status[4][1]}</li>
+                    <li>Velocidade: ${pokemon.status[5][1]}</li>
+                </ul>
             </section>
         </main>
-        <footer>
+        <footer class="voltar">
             <a href="index.html">
-                <button type="button">Voltar</button>
+                <button class="btn-voltar" type="button">Voltar</button>
             </a>
         </footer>
     `
